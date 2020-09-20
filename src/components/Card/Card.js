@@ -4,7 +4,7 @@ import { Card } from "react-bootstrap";
 import "./Card.css";
 const MyCard = ({ children, className, bodyClassName }) => {
   return (
-    <Card className={`bg-primary ${className}`}>
+    <Card className={`bg-primary rounded ${className}`}>
       <Card.Body className={bodyClassName}>{children}</Card.Body>
     </Card>
   );

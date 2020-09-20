@@ -1,18 +1,33 @@
-.bg-primary{
-  background: #1A1A1B !important;
+.bg-primary {
+  background: #1a1a1b !important;
   color: #ffffff !important;
 }
 
-.bg-secondary{
-  background: #393E46 !important;
+.bg-secondary {
+  background: #393e46 !important;
   color: #ffffff !important;
 }
 
-.bg-dark{
+.bg-dark {
   background: #030303 !important;
   color: #ffffff !important;
 }
 
-.home-wrapper{
+.home-wrapper {
   min-height: 100vh;
+}
+
+.btn-primary {
+  background: #ffffff !important;
+  color: #1a1a1b !important;
+  border-color: #1a1a1b;
+}
+.btn-primary:hover {
+  background: #393e46 !important;
+  color: #ffffff !important;
+  border-color: #ffffff;
+}
+
+.rounded{
+  border-radius: 1rem !important;
 }
