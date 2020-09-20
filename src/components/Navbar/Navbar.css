@@ -1,0 +1,12 @@
+.navbar a {
+  color: #ffffff !important;
+}
+.navbar-toggler {
+  background: #fff !important;
+}
+
+.navbar a:hover {
+  transition: 0.3s;
+  transition-timing-function: ease-in;
+  border-bottom: 1px solid #fff;
+}
