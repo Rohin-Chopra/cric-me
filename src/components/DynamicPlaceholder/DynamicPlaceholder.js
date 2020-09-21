@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getRandomInt } from "../utils";
+import { getRandomInt } from "../../utils";
 
 const DynamicPlaceholder = ({ className, options, onChange = () => {} }) => {
   const [placeholder, setPlaceholder] = useState("");
