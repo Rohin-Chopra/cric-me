@@ -9,10 +9,22 @@ import Card, { CardHeader } from "../../components/Card";
 import MatchCard from "../../components/MatchCard";
 import "./Home.css";
 
-const Home = () => {
-  const fetchRecentMatchesScores = () => {
-    console.log(recentMatches);
-    const data = recentMatches.map(async (match) => {
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recentMatches: [],
+    };
+  }
+
+  // parseTeamScore=(score,teams)=>{
+  //   const x= "Scorchers Women 63/10 v Typhoons Women 66/2 *"
+  //   const teams=["Scorchers Women","Typhoons Women"]
+    
+  // }
+
+  fetchRecentMatchesScores = async () => {
+    const data = this.state.recentMatches.map(async (match) => {
       if (match.matchStarted) {
         const response = await cricApi.get("/cricketScore", {
           params: {
@@ -28,86 +40,94 @@ const Home = () => {
       }
       return match;
     });
-    setRecentMatches(data);
+    const dataWithPromiseResolved = await Promise.all(data);
+    this.setState({ recentMatches: dataWithPromiseResolved });
   };
-  const fetchRecentMatches = async () => {
+  fetchRecentMatches = async () => {
     const response = await cricApi.get("/matches", {
       params: { apikey: apiKey },
     });
-    setRecentMatches(response.data.matches);
-    console.log(recentMatches);
-    // fetchRecentMatchesScores();
+    this.setState({ recentMatches: response.data.matches });
+    this.fetchRecentMatchesScores();
   };
-  const renderRecentMatches = () => {
-    return recentMatches.map((match) => {
+  renderRecentMatches = () => {
+    return this.state.recentMatches.map((match) => {
       return (
         <MatchCard
           isDone={match.matchStarted}
           location="Stadium, Location"
-          team1={{ name: match["team-1"], score: "192/8" }}
-          team2={{ name: match["team-2"], score: "192/8" }}
-          matchFooter="Team won by 8 wickets"
+          team1={{
+            name: match["team-1"],
+            score: match.score ? match.score : "192/8",
+          }}
+          team2={{
+            name: match["team-2"],
+            score: match.score ? match.score : "192/8",
+          }}
+          matchFooter={match.stat === "" ? "" : match.stat}
           key={match.unique_id}
         />
       );
     });
   };
-  const [recentMatches, setRecentMatches] = useState([]);
-  useEffect(() => {
-    fetchRecentMatches();
-  }, []);
-  return (
-    <div className="container d-flex align-items-center justify-content-center flex-column">
-      <div className="w-100 d-flex align-items-center justify-content-center">
-        <Card
-          className="text-center mt-2 rounded"
-          bodyClassName="d-flex flex-column align-items-center justify-content-center"
-        >
-          <h2>Which Player Do you Want to look at?</h2>
-          <InputGroup className="mb-3" id="search-bar">
-            <InputGroup.Prepend>
-              <InputGroup.Text id="player-name">
-                <FontAwesomeIcon icon={faSearch} />{" "}
-              </InputGroup.Text>
-            </InputGroup.Prepend>
-            <DynamicInput
-              className="bg-primary form-control"
-              options={["Dhoni", "Sachin", "Kohli", "Pant"]}
-            />
-          </InputGroup>
-          <div>
-            {" "}
-            <Button className="mr-3">Search Player</Button>
-            <Button>Get a random player</Button>
-          </div>
-        </Card>
-      </div>
 
-      <div className="w-100 d-flex align-items-center justify-content-center my-2">
-        <Card className="rounded">
-          <h3>Fact For today</h3>
-          <p>
-            In 1997 Women’s world cup, Belinda Clark hit a double ton and made
-            unbeaten 229 against Denmark.
-          </p>
-          <Button className="mr-3">Get Another Fact</Button>
-        </Card>
+  componentDidMount() {
+    this.fetchRecentMatches();
+  }
+  render() {
+    return (
+      <div className="container d-flex align-items-center justify-content-center flex-column">
+        <div className="w-100 d-flex align-items-center justify-content-center">
+          <Card
+            className="text-center mt-2 rounded"
+            bodyClassName="d-flex flex-column align-items-center justify-content-center"
+          >
+            <h2>Which Player Do you Want to look at?</h2>
+            <InputGroup className="mb-3" id="search-bar">
+              <InputGroup.Prepend>
+                <InputGroup.Text id="player-name">
+                  <FontAwesomeIcon icon={faSearch} />{" "}
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <DynamicInput
+                className="bg-primary form-control"
+                options={["Dhoni", "Sachin", "Kohli", "Pant"]}
+              />
+            </InputGroup>
+            <div>
+              {" "}
+              <Button className="mr-3">Search Player</Button>
+              <Button>Get a random player</Button>
+            </div>
+          </Card>
+        </div>
+
+        <div className="w-100 d-flex align-items-center justify-content-center my-2">
+          <Card className="rounded">
+            <h3>Fact For today</h3>
+            <p>
+              In 1997 Women’s world cup, Belinda Clark hit a double ton and made
+              unbeaten 229 against Denmark.
+            </p>
+            <Button className="mr-3">Get Another Fact</Button>
+          </Card>
+        </div>
+        <div className="w-100 d-flex align-items-center justify-content-center my-2 flex-column">
+          <CardHeader className=" rounded-top card-header">
+            <p className="mb-0 font-weight-bold">Results Of Matches</p>
+          </CardHeader>
+          <MatchCard
+            isDone
+            location="Stadium, Location"
+            team1={{ name: "team1", score: "192/8" }}
+            team2={{ name: "team2", score: "192/8" }}
+            matchFooter="Team won by 8 wickets"
+          />
+          {this.renderRecentMatches()}
+          <Button className="my-2">View More</Button>
+        </div>
       </div>
-      <div className="w-100 d-flex align-items-center justify-content-center my-2 flex-column">
-        <CardHeader className=" rounded-top card-header">
-          <p className="mb-0 font-weight-bold">Results Of Matches</p>
-        </CardHeader>
-        <MatchCard
-          isDone
-          location="Stadium, Location"
-          team1={{ name: "team1", score: "192/8" }}
-          team2={{ name: "team2", score: "192/8" }}
-          matchFooter="Team won by 8 wickets"
-        />
-        {renderRecentMatches()}
-        <Button className="my-2">View More</Button>
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 export default Home;
