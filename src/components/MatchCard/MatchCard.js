@@ -3,7 +3,8 @@ import React from "react";
 import Card from "../Card";
 import { CardHeader } from "../Card";
 
-const MatchCard = ({ location, team1, team2, matchFooter, isDone }) => {
+const MatchCard = ({ location, team1, team2, matchFooter, isDone,date=""}) => {
+  
   const scores = () => {
     return isDone
       ? [<span>{team1.score}</span>, <span>{team2.score}</span>]
@@ -13,7 +14,9 @@ const MatchCard = ({ location, team1, team2, matchFooter, isDone }) => {
     <React.Fragment>
       <Card style={{ borderRadius: "0" }}>
         <div className="match-card-header">
-          <p className="font-weight-bold mb-0">{isDone ? "Result" : null}</p>
+          <p className="font-weight-bold mb-0">
+            {isDone ? "Result" : "Scheduled"}
+          </p>
           <p className="text-secondary">{location}</p>
         </div>
         <div className="d-flex justify-content-between mb-2">

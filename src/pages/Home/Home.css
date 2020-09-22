@@ -4,4 +4,23 @@
 
 #search-bar input:focus {
   border-color: #ffffff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 1);
+}
+#search-bar:hover {
+  border-color: #ffffff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 1);
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* Styles */
+  #search-bar {
+    width: 100%;
+  }
+  .search-bar-btns {
+    display: flex;
+  }
+  .search-bar-btns .btn {
+    padding: 0.375rem 0.5rem !important;
+  }
 }

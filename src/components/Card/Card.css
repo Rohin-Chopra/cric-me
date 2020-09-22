@@ -1,6 +1,7 @@
 .card{
-  width: 80%;
+  width: 100%;
 }
 .card-header{
-  width: 80%;
+  width: 100%;
+  transform: perspective(10px);
 }
