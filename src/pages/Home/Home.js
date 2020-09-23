@@ -7,10 +7,11 @@ import cricApi, { apiKey } from "../../api/cricApi";
 import DynamicInput from "../../components/DynamicPlaceholder";
 import Card, { CardHeader } from "../../components/Card";
 import MatchCard from "../../components/MatchCard";
+import NewsCard from "../../components/NewsCard";
 import {
   FactPlaceholder,
   MatchCardPlaceholderList,
-} from "../../components/placeholders";
+} from "../../components/Placeholders";
 import { formatDate } from "../../utils";
 import "./Home.css";
 
@@ -189,7 +190,6 @@ class Home extends React.Component {
             </div>
           </Card>
         </div>
-
         <div className="w-100 d-flex align-items-center justify-content-center my-2">
           <Card className="rounded">
             <h3>Fact For today</h3>
@@ -219,6 +219,14 @@ class Home extends React.Component {
           {this.renderUpcomingMatches()}
           <Button className="my-2">View More</Button>
         </div>
+        <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
+          <NewsCard
+            imgURL=""
+            title="title"
+            subtitle="Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper"
+          />
+        </div>
+        NewsCard
       </div>
     );
   }
