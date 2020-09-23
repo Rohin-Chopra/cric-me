@@ -2,9 +2,9 @@ import React from "react";
 import { Button, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 import cricApi, { cricApiKey } from "../../api/cricApi";
 import newsApi, { newsApiKey } from "../../api/newsApi";
-
 import DynamicInput from "../../components/DynamicPlaceholder";
 import Card, { CardHeader } from "../../components/Card";
 import MatchCard from "../../components/MatchCard";
@@ -13,6 +13,7 @@ import NewsCard from "../../components/NewsCard";
 import {
   FactPlaceholder,
   MatchCardPlaceholderList,
+  NewsCardPlaceholderList,
 } from "../../components/Placeholders";
 import { formatDate } from "../../utils";
 import "./Home.css";
@@ -22,7 +23,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       articles: [],
-      articlesLoading: {},
+      articlesLoading: true,
       recentMatches: [],
       recentMatchesLoading: true,
       upcomingMatchesLoading: true,
@@ -147,6 +148,8 @@ class Home extends React.Component {
       });
   };
   fetchFact() {
+    this.setState({fact:''})
+    this.setState({ factLoading: true });
     setTimeout(() => {
       this.setState({ fact: true });
       this.setState({ factLoading: false });
@@ -160,6 +163,7 @@ class Home extends React.Component {
       },
     });
     const articles = (await response).data.articles;
+    this.setState({ articlesLoading: false });
     this.setState({ articles: articles });
   };
   renderNewsCards = () => {
@@ -170,7 +174,8 @@ class Home extends React.Component {
           <NewsCard
             imgURL={article.urlToImage}
             title={article.title}
-            subtitle={article.content}
+            subtitle={article.description}
+            link={article.url}
           />
         );
       });
@@ -182,7 +187,7 @@ class Home extends React.Component {
           In 1997 Women’s world cup, Belinda Clark hit a double ton and made
           unbeaten 229 against Denmark.
         </p>
-        <Button className="mr-3">Get Another Fact</Button>
+        <Button className="mr-3" onClick={()=>this.fetchFact()}>Get Another Fact</Button>
       </>
     ) : null;
   }
@@ -248,9 +253,16 @@ class Home extends React.Component {
           <Button className="my-2">View More</Button>
         </div>
         <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
+          <CardHeader className=" rounded-top card-header w-80">
+            <p className="mb-0 font-weight-bold">News</p>
+          </CardHeader>
+          <NewsCardPlaceholderList
+            loading={this.state.articlesLoading}
+            count={4}
+          />
           {this.renderNewsCards()}
+          <Button className="my-2">View More</Button>
         </div>
-        NewsCard
       </div>
     );
   }

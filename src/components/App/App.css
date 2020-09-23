@@ -1,11 +1,18 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+a {
+  color: #fff;
+  text-decoration: none;
+}
+a:hover {
+  color: whitesmoke;
+  text-decoration: underline;
+}
 .bg-primary {
-  background-color: #232B32 !important;
+  background-color: #232b32 !important;
   color: #ffffff !important;
 }
 
@@ -34,11 +41,10 @@
   border-color: #ffffff;
 }
 
-.rounded{
+.rounded {
   border-radius: 1rem !important;
 }
 
-.shadow-dark{
+.shadow-dark {
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 1);
 }
-

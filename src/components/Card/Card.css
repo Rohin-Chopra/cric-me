@@ -1,7 +1,19 @@
-.card{
+.card {
   width: 100%;
 }
-.card-header{
+.card-header {
   width: 100%;
   transform: perspective(10px);
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* Styles */
+  .news-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 }
