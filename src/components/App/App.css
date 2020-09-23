@@ -5,17 +5,17 @@
 }
 
 .bg-primary {
-  background: #232B32 !important;
+  background-color: #232B32 !important;
   color: #ffffff !important;
 }
 
 .bg-secondary {
-  background: #393e46 !important;
+  background-color: #393e46 !important;
   color: #ffffff !important;
 }
 
 .bg-dark {
-  background: #152028 !important;
+  background-color: #152028 !important;
   color: #ffffff !important;
 }
 

@@ -7,6 +7,10 @@ import cricApi, { apiKey } from "../../api/cricApi";
 import DynamicInput from "../../components/DynamicPlaceholder";
 import Card, { CardHeader } from "../../components/Card";
 import MatchCard from "../../components/MatchCard";
+import {
+  FactPlaceholder,
+  MatchCardPlaceholderList,
+} from "../../components/placeholders";
 import { formatDate } from "../../utils";
 import "./Home.css";
 
@@ -15,11 +19,16 @@ class Home extends React.Component {
     super(props);
     this.state = {
       recentMatches: [],
+      recentMatchesLoading: true,
+      upcomingMatchesLoading: true,
       upcomingMatches: [],
+      fact: false,
+      factLoading: true,
     };
   }
 
-  parseTeamScore = (score, teams) => {
+  parseTeamScore = (score = "", teams) => {
+    if (score === "") return "";
     const scoreArray = score.split(" ");
     let prevEl = 0;
     const scoresForTeams = [];
@@ -38,9 +47,6 @@ class Home extends React.Component {
         scoreArray.splice(scoreArray.indexOf("v"), 1);
       }
     }
-    console.log(score);
-    console.log(teams);
-    console.log(scoresForTeams);
     return scoresForTeams;
   };
 
@@ -70,19 +76,23 @@ class Home extends React.Component {
       params: { apikey: apiKey },
     });
     const upcomingMatches = [];
-    const recentMatches = response.data.matches.filter((match) => {
-      if (match.matchStarted) {
-        return match;
-      }
-      upcomingMatches.push(match);
-    });
-
+    const recentMatches = response.data.matches
+      .filter((match) => {
+        if (match.matchStarted) {
+          return match;
+        }
+        upcomingMatches.push(match);
+      })
+      .filter((el, index) => index < 2);
+    this.setState({ recentMatchesLoading: false });
     this.setState({ recentMatches: recentMatches });
+    this.setState({ upcomingMatchesLoading: false });
     this.setState({ upcomingMatches: upcomingMatches });
     this.fetchRecentMatchesScores();
   };
   renderRecentMatches = () => {
     return this.state.recentMatches.map((match) => {
+      console.log(match);
       const scores = match.stat
         ? this.parseTeamScore(match.score, [match["team-1"], match["team-2"]])
         : ["", ""];
@@ -108,31 +118,49 @@ class Home extends React.Component {
   };
 
   renderUpcomingMatches = () => {
-    return this.state.upcomingMatches.filter((match,index)=>index < 3).map((match,index) => {
-      if(index){
-
-      }
-      return (
-        <div className="shadow-dark w-100 mb-1">
-          <MatchCard
-            isDone={false}
-            location="Stadium, Location"
-            team1={{
-              name: match["team-1"],
-            }}
-            team2={{
-              name: match["team-2"],
-            }}
-            matchFooter={formatDate(match.date)}
-            key={match.unique_id}
-          />
-        </div>
-      );
-    });
+    return this.state.upcomingMatches
+      .filter((match, index) => index < 3)
+      .map((match, index) => {
+        if (index) {
+        }
+        return (
+          <div className="shadow-dark w-100 mb-1">
+            <MatchCard
+              isDone={false}
+              location="Stadium, Location"
+              team1={{
+                name: match["team-1"],
+              }}
+              team2={{
+                name: match["team-2"],
+              }}
+              matchFooter={formatDate(match.date)}
+              key={match.unique_id}
+            />
+          </div>
+        );
+      });
   };
-
+  fetchFact() {
+    setTimeout(() => {
+      this.setState({ fact: true });
+      this.setState({ factLoading: false });
+    }, 1000);
+  }
+  renderFact() {
+    return this.state.fact ? (
+      <>
+        <p>
+          In 1997 Women’s world cup, Belinda Clark hit a double ton and made
+          unbeaten 229 against Denmark.
+        </p>
+        <Button className="mr-3">Get Another Fact</Button>
+      </>
+    ) : null;
+  }
   componentDidMount() {
     this.fetchRecentMatches();
+    this.fetchFact();
   }
   render() {
     return (
@@ -165,17 +193,18 @@ class Home extends React.Component {
         <div className="w-100 d-flex align-items-center justify-content-center my-2">
           <Card className="rounded">
             <h3>Fact For today</h3>
-            <p>
-              In 1997 Women’s world cup, Belinda Clark hit a double ton and made
-              unbeaten 229 against Denmark.
-            </p>
-            <Button className="mr-3">Get Another Fact</Button>
+            <FactPlaceholder loading={this.state.factLoading} />
+            {this.renderFact()}
           </Card>
         </div>
         <div className="w-100 d-flex align-items-center justify-content-center mt-1 flex-column">
           <CardHeader className=" rounded-top card-header w-80">
             <p className="mb-0 font-weight-bold">Results Of Matches</p>
           </CardHeader>
+          <MatchCardPlaceholderList
+            loading={this.state.recentMatchesLoading}
+            count={4}
+          />
           {this.renderRecentMatches()}
           <Button className="my-2">View More</Button>
         </div>
@@ -183,6 +212,10 @@ class Home extends React.Component {
           <CardHeader className=" rounded-top card-header w-80">
             <p className="mb-0 font-weight-bold">Upcoming</p>
           </CardHeader>
+          <MatchCardPlaceholderList
+            loading={this.state.upcomingMatchesLoading}
+            count={4}
+          />
           {this.renderUpcomingMatches()}
           <Button className="my-2">View More</Button>
         </div>
@@ -206,3 +239,18 @@ export default Home;
             team2={{ name: "", score: "" }}
             matchFooter=""
           /> */
+
+/* <div className="w-100 d-flex align-items-center justify-content-center mt-1 flex-column">
+          <CardHeader className=" rounded-top card-header w-80">
+            <p className="mb-0 font-weight-bold">Results Of Matches</p>
+          </CardHeader>
+          {this.renderRecentMatches()}
+          <Button className="my-2">View More</Button>
+        </div>
+        <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
+          <CardHeader className=" rounded-top card-header w-80">
+            <p className="mb-0 font-weight-bold">Upcoming</p>
+          </CardHeader>
+          {this.renderUpcomingMatches()}
+          <Button className="my-2">View More</Button>
+        </div> */

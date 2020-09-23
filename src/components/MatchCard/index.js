@@ -1,3 +1,4 @@
-import MatchCard from './MatchCard'
+import MatchCard from "./MatchCard";
+
 
 export default MatchCard;
