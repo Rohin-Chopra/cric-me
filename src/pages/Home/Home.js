@@ -2,12 +2,14 @@ import React from "react";
 import { Button, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import cricApi, { apiKey } from "../../api/cricApi";
+import cricApi, { cricApiKey } from "../../api/cricApi";
+import newsApi, { newsApiKey } from "../../api/newsApi";
 
 import DynamicInput from "../../components/DynamicPlaceholder";
 import Card, { CardHeader } from "../../components/Card";
 import MatchCard from "../../components/MatchCard";
 import NewsCard from "../../components/NewsCard";
+
 import {
   FactPlaceholder,
   MatchCardPlaceholderList,
@@ -19,6 +21,8 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      articles: [],
+      articlesLoading: {},
       recentMatches: [],
       recentMatchesLoading: true,
       upcomingMatchesLoading: true,
@@ -56,7 +60,7 @@ class Home extends React.Component {
       if (match.matchStarted) {
         const response = await cricApi.get("/cricketScore", {
           params: {
-            apikey: apiKey,
+            apikey: cricApiKey,
             unique_id: match.unique_id,
           },
         });
@@ -74,7 +78,7 @@ class Home extends React.Component {
   };
   fetchRecentMatches = async () => {
     const response = await cricApi.get("/matches", {
-      params: { apikey: apiKey },
+      params: { apikey: cricApiKey },
     });
     const upcomingMatches = [];
     const recentMatches = response.data.matches
@@ -148,6 +152,29 @@ class Home extends React.Component {
       this.setState({ factLoading: false });
     }, 1000);
   }
+  fetchNews = async () => {
+    const response = newsApi.get("/", {
+      params: {
+        apiKey: newsApiKey,
+        sources: "espn-cric-info",
+      },
+    });
+    const articles = (await response).data.articles;
+    this.setState({ articles: articles });
+  };
+  renderNewsCards = () => {
+    return this.state.articles
+      .filter((match, index) => index < 3)
+      .map((article) => {
+        return (
+          <NewsCard
+            imgURL={article.urlToImage}
+            title={article.title}
+            subtitle={article.content}
+          />
+        );
+      });
+  };
   renderFact() {
     return this.state.fact ? (
       <>
@@ -160,8 +187,9 @@ class Home extends React.Component {
     ) : null;
   }
   componentDidMount() {
-    this.fetchRecentMatches();
     this.fetchFact();
+    this.fetchRecentMatches();
+    this.fetchNews();
   }
   render() {
     return (
@@ -220,11 +248,7 @@ class Home extends React.Component {
           <Button className="my-2">View More</Button>
         </div>
         <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
-          <NewsCard
-            imgURL=""
-            title="title"
-            subtitle="Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper"
-          />
+          {this.renderNewsCards()}
         </div>
         NewsCard
       </div>

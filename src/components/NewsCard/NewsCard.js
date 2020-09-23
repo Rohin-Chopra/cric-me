@@ -2,18 +2,15 @@ import React from "react";
 
 import Card from "../Card";
 
-const NewsCard = ({ imageURL, title, subtitle, link = "" }) => {
+const NewsCard = ({ imgURL, title, subtitle, link = "" }) => {
   return (
-    <Card bodyClassName="d-flex">
-      {/* <img className="news-img" src={imageURL} /> */}
-      <div style={{background:'red',height:'200px',width:'200px'}}>
-    
-      </div>
-      <div className="news-content">
-        <h4>{title}</h4>
+    <Card bodyClassName="d-flex justify-content-around">
+      <img className="news-img rounded" src={imgURL}  style={{width:'200px',height:'150px'}}/>
+      <div className="news-content ml-3">
+        <h4 className="font-weight-strong">{title}</h4>
         <p>{subtitle}</p>
       </div>
     </Card>
   );
 };
-export default NewsCard
+export default NewsCard;
