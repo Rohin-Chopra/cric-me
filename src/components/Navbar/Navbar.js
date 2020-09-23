@@ -5,7 +5,9 @@ import "./Navbar.css";
 const MyNavBar = () => {
   return (
     <div className="bg-primary text-center">
-      <Navbar.Brand className="text-white" href="#home">CricMe</Navbar.Brand>
+      <Navbar.Brand className="text-white" href="#home">
+        CricMe
+      </Navbar.Brand>
       <Navbar bg="primary" className="justify-content-center" expand="lg">
         <Navbar.Toggle aria-controls="navbar-toggle" />
         <Navbar.Collapse className="justify-content-center" id="navbar-toggle">

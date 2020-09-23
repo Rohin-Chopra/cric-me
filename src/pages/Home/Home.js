@@ -148,7 +148,7 @@ class Home extends React.Component {
       });
   };
   fetchFact() {
-    this.setState({fact:''})
+    this.setState({ fact: "" });
     this.setState({ factLoading: true });
     setTimeout(() => {
       this.setState({ fact: true });
@@ -187,7 +187,9 @@ class Home extends React.Component {
           In 1997 Women’s world cup, Belinda Clark hit a double ton and made
           unbeaten 229 against Denmark.
         </p>
-        <Button className="mr-3" onClick={()=>this.fetchFact()}>Get Another Fact</Button>
+        <Button className="mr-3" onClick={() => this.fetchFact()}>
+          Get Another Fact
+        </Button>
       </>
     ) : null;
   }

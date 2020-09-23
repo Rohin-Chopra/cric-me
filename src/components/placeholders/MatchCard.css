@@ -1,9 +1,30 @@
-.ui.placeholder, .ui.placeholder .image.header:after, .ui.placeholder .line, .ui.placeholder .line:after, .ui.placeholder>:before {
-  background-color: #232B32;
+.ui.placeholder,
+.ui.placeholder .image.header:after,
+.ui.placeholder .line,
+.ui.placeholder .line:after,
+.ui.placeholder > :before {
+  background-color: #232b32;
 }
 
 .ui.placeholder {
-  background-image: -webkit-gradient(linear,left top,right top,from(rgba(255,255,255,.08)),color-stop(15%,rgba(255, 255, 255, 0.15)),color-stop(30%,rgba(255,255,255,.08)));
-  background-image: -webkit-linear-gradient(left,rgba(0,0,0,.08) 0,rgba(0,0,0,.15) 15%,rgba(0,0,0,.08) 30%);
-  background-image: linear-gradient(to right,rgba(255,255,255,.08) 0,rgba(255,255,255,.15) 15%,rgba(255,255,255,.08) 30%);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(rgba(255, 255, 255, 0.08)),
+    color-stop(15%, rgba(255, 255, 255, 0.15)),
+    color-stop(30%, rgba(255, 255, 255, 0.08))
+  );
+  background-image: -webkit-linear-gradient(
+    left,
+    rgba(0, 0, 0, 0.08) 0,
+    rgba(0, 0, 0, 0.15) 15%,
+    rgba(0, 0, 0, 0.08) 30%
+  );
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.08) 0,
+    rgba(255, 255, 255, 0.15) 15%,
+    rgba(255, 255, 255, 0.08) 30%
+  );
 }

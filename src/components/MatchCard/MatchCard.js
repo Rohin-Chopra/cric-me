@@ -3,8 +3,14 @@ import React from "react";
 import Card from "../Card";
 import { CardHeader } from "../Card";
 
-const MatchCard = ({ location, team1, team2, matchFooter, isDone,date=""}) => {
-  
+const MatchCard = ({
+  location,
+  team1,
+  team2,
+  matchFooter,
+  isDone,
+  date = "",
+}) => {
   const scores = () => {
     return isDone
       ? [<span>{team1.score}</span>, <span>{team2.score}</span>]
