@@ -1,0 +1,10 @@
+#main-footer {
+  height: 100px;
+  text-align: center;
+  font-size: 2rem;
+  padding: 1.5rem;
+}
+#main-footer svg{
+  margin-right: 1.5rem;
+  cursor: pointer;
+}

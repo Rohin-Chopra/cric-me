@@ -5,9 +5,10 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import cricApi, { cricApiKey } from "../../api/cricApi";
 import newsApi, { newsApiKey } from "../../api/newsApi";
+import factApi, { factApiKey } from "../../api/factApi";
 import DynamicInput from "../../components/DynamicPlaceholder";
 import Card, { CardHeader } from "../../components/Card";
-import MatchCard from "../../components/MatchCard";
+import { recentMatchList, upcomingMatchList } from "../../components/MatchCard";
 import NewsCard from "../../components/NewsCard";
 
 import {
@@ -15,7 +16,6 @@ import {
   MatchCardPlaceholderList,
   NewsCardPlaceholderList,
 } from "../../components/Placeholders";
-import { formatDate } from "../../utils";
 import "./Home.css";
 
 class Home extends React.Component {
@@ -28,7 +28,7 @@ class Home extends React.Component {
       recentMatchesLoading: true,
       upcomingMatchesLoading: true,
       upcomingMatches: [],
-      fact: false,
+      fact: "",
       factLoading: true,
     };
   }
@@ -75,7 +75,6 @@ class Home extends React.Component {
     });
     const dataWithPromiseResolved = await Promise.all(data);
     this.setState({ recentMatches: dataWithPromiseResolved });
-    console.log(dataWithPromiseResolved);
   };
   fetchRecentMatches = async () => {
     const response = await cricApi.get("/matches", {
@@ -97,72 +96,34 @@ class Home extends React.Component {
     this.fetchRecentMatchesScores();
   };
   renderRecentMatches = () => {
-    return this.state.recentMatches.map((match) => {
-      console.log(match);
-      const scores = match.stat
-        ? this.parseTeamScore(match.score, [match["team-1"], match["team-2"]])
-        : ["", ""];
-      return (
-        <div className="shadow-dark w-100 mb-1">
-          <MatchCard
-            isDone={match.matchStarted}
-            location="Stadium, Location"
-            team1={{
-              name: match["team-1"],
-              score: match.matchStarted && match.stat ? scores[0] : "",
-            }}
-            team2={{
-              name: match["team-2"],
-              score: match.matchStarted && match.stat ? scores[1] : "",
-            }}
-            matchFooter={match.stat === "" ? "" : match.stat}
-            key={match.unique_id}
-          />
-        </div>
-      );
-    });
+    return upcomingMatchList(this.state.recentMatches);
   };
 
   renderUpcomingMatches = () => {
-    return this.state.upcomingMatches
-      .filter((match, index) => index < 3)
-      .map((match, index) => {
-        if (index) {
-        }
-        return (
-          <div className="shadow-dark w-100 mb-1">
-            <MatchCard
-              isDone={false}
-              location="Stadium, Location"
-              team1={{
-                name: match["team-1"],
-              }}
-              team2={{
-                name: match["team-2"],
-              }}
-              matchFooter={formatDate(match.date)}
-              key={match.unique_id}
-            />
-          </div>
-        );
-      });
+    return recentMatchList(
+      this.state.upcomingMatches.filter((match, index) => index < 3)
+    );
   };
-  fetchFact() {
+  fetchFact = async () => {
     this.setState({ fact: "" });
     this.setState({ factLoading: true });
-    setTimeout(() => {
-      this.setState({ fact: true });
-      this.setState({ factLoading: false });
-    }, 1000);
-  }
+    const response = await factApi.get("/");
+    const fact = response.data.fact;
+    this.setState({ fact: fact });
+    this.setState({ factLoading: false });
+  };
   fetchNews = async () => {
-    const response = newsApi.get("/", {
-      params: {
-        apiKey: newsApiKey,
-        sources: "espn-cric-info",
-      },
-    });
-    const articles = (await response).data.articles;
+    const response = await newsApi
+      .get("/", {
+        params: {
+          token: newsApiKey,
+          q: "cricket",
+        },
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    const articles = response.data.articles;
     this.setState({ articlesLoading: false });
     this.setState({ articles: articles });
   };
@@ -172,7 +133,7 @@ class Home extends React.Component {
       .map((article) => {
         return (
           <NewsCard
-            imgURL={article.urlToImage}
+            imgURL={article.image}
             title={article.title}
             subtitle={article.description}
             link={article.url}
@@ -181,17 +142,14 @@ class Home extends React.Component {
       });
   };
   renderFact() {
-    return this.state.fact ? (
+    return (
       <>
-        <p>
-          In 1997 Women’s world cup, Belinda Clark hit a double ton and made
-          unbeaten 229 against Denmark.
-        </p>
+        <p>{this.state.fact}</p>
         <Button className="mr-3" onClick={() => this.fetchFact()}>
           Get Another Fact
         </Button>
       </>
-    ) : null;
+    );
   }
   componentDidMount() {
     this.fetchFact();
