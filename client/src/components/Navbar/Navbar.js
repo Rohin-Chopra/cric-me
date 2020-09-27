@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
 
 import "./Navbar.css";
@@ -12,10 +13,10 @@ const MyNavBar = () => {
         <Navbar.Toggle aria-controls="navbar-toggle" />
         <Navbar.Collapse className="justify-content-center" id="navbar-toggle">
           <Nav>
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Players</Nav.Link>
-            <Nav.Link href="#home">News</Nav.Link>
-            <Nav.Link href="#home">Matches</Nav.Link>
+            <Link to="/"><Nav.Link href="#home">Home</Nav.Link></Link>
+            <Link to="/players"><Nav.Link href="#link">Players</Nav.Link></Link>
+            <Link to="/news"><Nav.Link href="#home">News</Nav.Link></Link>
+            <Link to="/matches"><Nav.Link href="#home">Matches</Nav.Link></Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

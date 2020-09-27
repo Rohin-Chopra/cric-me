@@ -7,10 +7,7 @@ a {
   color: #fff;
   text-decoration: none;
 }
-a:hover {
-  color: whitesmoke;
-  text-decoration: underline;
-}
+
 .bg-primary {
   background-color: #232b32 !important;
   color: #ffffff !important;
