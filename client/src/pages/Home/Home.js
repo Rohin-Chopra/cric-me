@@ -3,28 +3,22 @@ import { Button, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-import cricApi, { cricApiKey } from "../../api/cricApi";
 import {
   fetchNews,
   fetchFact,
   fetchMatches,
   fetchMatchesScores,
 } from "../../helper";
-import factApi, { factApiKey } from "../../api/factApi";
 import DynamicInput from "../../components/DynamicPlaceholder";
 import Card, { CardHeader } from "../../components/Card";
-import MatchCard, {
-  upcomingMatchList,
-  recentMatchList,
-} from "../../components/MatchCard";
-import NewsCard, { newsCardList } from "../../components/NewsCard";
+import { upcomingMatchList, recentMatchList } from "../../components/MatchCard";
+import { newsCardList } from "../../components/NewsCard";
 
 import {
   FactPlaceholder,
   MatchCardPlaceholderList,
   NewsCardPlaceholderList,
 } from "../../components/Placeholders";
-import { formatDate, parseTeamScore } from "../../utils";
 import "./Home.css";
 
 class Home extends React.Component {
