@@ -17,7 +17,7 @@ import MatchCard, {
   upcomingMatchList,
   recentMatchList,
 } from "../../components/MatchCard";
-import NewsCard from "../../components/NewsCard";
+import NewsCard, { newsCardList } from "../../components/NewsCard";
 
 import {
   FactPlaceholder,
@@ -75,19 +75,9 @@ class Home extends React.Component {
   };
 
   renderNewsCards = () => {
-    return this.state.articles
-      .filter((match, index) => index < 3)
-      .map((article) => {
-        return (
-          <NewsCard
-            imgURL={article.image}
-            title={article.title}
-            subtitle={article.description}
-            link={article.url}
-            key={article.description + article.name}
-          />
-        );
-      });
+    return newsCardList(
+      this.state.articles.filter((match, index) => index < 3)
+    );
   };
   getFact = async () => {
     this.setState({ fact: "" });
@@ -100,7 +90,7 @@ class Home extends React.Component {
     return (
       <>
         <p>{this.state.fact}</p>
-        <Button className="mr-3" onClick={() => this.fetchFact()}>
+        <Button className="mr-3" onClick={() => this.getFact()}>
           Get Another Fact
         </Button>
       </>

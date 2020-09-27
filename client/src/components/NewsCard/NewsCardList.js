@@ -9,6 +9,7 @@ const newsCardList = (articles) => {
         title={article.title}
         subtitle={article.description}
         link={article.url}
+        key={article.description + article.name}
       />
     );
   });
