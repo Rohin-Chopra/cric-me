@@ -4,11 +4,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import cricApi, { cricApiKey } from "../../api/cricApi";
-import { fetchNews } from "../../helper";
+import {
+  fetchNews,
+  fetchFact,
+  fetchMatches,
+  fetchMatchesScores,
+} from "../../helper";
 import factApi, { factApiKey } from "../../api/factApi";
 import DynamicInput from "../../components/DynamicPlaceholder";
 import Card, { CardHeader } from "../../components/Card";
-import MatchCard from "../../components/MatchCard";
+import MatchCard, {
+  upcomingMatchList,
+  recentMatchList,
+} from "../../components/MatchCard";
 import NewsCard from "../../components/NewsCard";
 
 import {
@@ -34,133 +42,38 @@ class Home extends React.Component {
     };
   }
 
-  parseTeamScore = (score = "", teams) => {
-    if (score === "") return "";
-    const scoreArray = score.split(" ");
-    let prevEl = 0;
-    const scoresForTeams = [];
-    for (let i = 0; i < scoreArray.length; i++) {
-      if (scoreArray[i].includes("/")) {
-        if (prevEl === 0) {
-          scoresForTeams.push(scoreArray.slice(i, i + 1).join(" "));
-        } else {
-          scoresForTeams.push(
-            scoreArray.slice(i, i.length).find((el) => {
-              return el.includes("/");
-            })
-          );
-        }
-        prevEl = i + 1;
-        scoreArray.splice(scoreArray.indexOf("v"), 1);
-      }
-    }
-    return scoresForTeams;
+  getMatchesScores = async () => {
+    const recentMatchesWithScores = await fetchMatchesScores(
+      this.state.recentMatches
+    );
+    this.setState({ recentMatches: recentMatchesWithScores });
   };
 
-  fetchRecentMatchesScores = async () => {
-    const data = this.state.recentMatches.map(async (match) => {
-      if (match.matchStarted) {
-        const response = await cricApi.get("/cricketScore", {
-          params: {
-            apikey: cricApiKey,
-            unique_id: match.unique_id,
-          },
-        });
-        return {
-          ...match,
-          stat: response.data.stat,
-          score: response.data.score,
-        };
-      }
-      return match;
-    });
-    const dataWithPromiseResolved = await Promise.all(data);
-    this.setState({ recentMatches: dataWithPromiseResolved });
-  };
-  fetchRecentMatches = async () => {
-    const response = await cricApi.get("/matches", {
-      params: { apikey: cricApiKey },
-    });
-    const upcomingMatches = [];
-    const recentMatches = response.data.matches
-      .filter((match) => {
-        if (match.matchStarted) {
-          return match;
-        }
-        upcomingMatches.push(match);
-      })
-      .filter((el, index) => index < 2);
+  getMatches = async () => {
+    const [recentMatches, upcomingMatches] = await fetchMatches();
     this.setState({ recentMatchesLoading: false });
-    this.setState({ recentMatches: recentMatches });
+    this.setState({
+      recentMatches: recentMatches.filter((match, index) => index < 3),
+    });
     this.setState({ upcomingMatchesLoading: false });
-    this.setState({ upcomingMatches: upcomingMatches });
-    this.fetchRecentMatchesScores();
+    this.setState({
+      upcomingMatches: upcomingMatches.filter((match, index) => index < 3),
+    });
+    this.getMatchesScores();
   };
   renderRecentMatches = () => {
-    return this.state.recentMatches.map((match) => {
-      const scores = match.stat
-        ? parseTeamScore(match.score, [match["team-1"], match["team-2"]])
-        : ["", ""];
-      const winnerTeam = match.winner_team ? match.winner_team : "";
-      return (
-        <div className="shadow-dark w-100 mb-1">
-          <MatchCard
-            isDone={match.matchStarted}
-            location="Stadium, Location"
-            team1={{
-              name: match["team-1"],
-              score: match.matchStarted && match.stat ? scores[0] : "",
-            }}
-            team2={{
-              name: match["team-2"],
-              score: match.matchStarted && match.stat ? scores[1] : "",
-            }}
-            matchFooter={match.stat === "" ? "" : match.stat}
-            key={match.unique_id}
-            winnerTeam={winnerTeam !== "" ? winnerTeam : ""}
-          />
-        </div>
-      );
-    });
+    return recentMatchList(this.state.recentMatches);
   };
 
   renderUpcomingMatches = () => {
-    return this.state.upcomingMatches
-      .filter((match, index) => index < 3)
-      .map((match, index) => {
-        if (index) {
-        }
-        return (
-          <div className="shadow-dark w-100 mb-1">
-            <MatchCard
-              isDone={false}
-              location="Stadium, Location"
-              team1={{
-                name: match["team-1"],
-              }}
-              team2={{
-                name: match["team-2"],
-              }}
-              matchFooter={formatDate(match.date)}
-              key={match.unique_id}
-            />
-          </div>
-        );
-      });
-  };
-  fetchFact = async () => {
-    this.setState({ fact: "" });
-    this.setState({ factLoading: true });
-    const response = await factApi.get("/");
-    const fact = response.data.fact;
-    this.setState({ fact: fact });
-    this.setState({ factLoading: false });
+    return upcomingMatchList(this.state.upcomingMatches);
   };
   getNews = async () => {
     const articles = await fetchNews();
     this.setState({ articlesLoading: false });
     this.setState({ articles: articles.filter((match, index) => index < 3) });
   };
+
   renderNewsCards = () => {
     return this.state.articles
       .filter((match, index) => index < 3)
@@ -171,9 +84,17 @@ class Home extends React.Component {
             title={article.title}
             subtitle={article.description}
             link={article.url}
+            key={article.description + article.name}
           />
         );
       });
+  };
+  getFact = async () => {
+    this.setState({ fact: "" });
+    this.setState({ factLoading: true });
+    const fact = await fetchFact();
+    this.setState({ fact: fact });
+    this.setState({ factLoading: false });
   };
   renderFact() {
     return (
@@ -186,8 +107,8 @@ class Home extends React.Component {
     );
   }
   componentDidMount() {
-    this.fetchFact();
-    this.fetchRecentMatches();
+    this.getFact();
+    this.getMatches();
     this.getNews();
   }
   render() {
@@ -262,33 +183,3 @@ class Home extends React.Component {
   }
 }
 export default Home;
-
-/* <MatchCard
-            isDone
-            location="Stadium, Location"
-            team1={{ name: "team1", score: "192/8" }}
-            team2={{ name: "team2", score: "192/8" }}
-            matchFooter="Team won by 8 wickets"
-          />
-          <MatchCard
-            isDone
-            location=""
-            team1={{ name: "", score: "" }}
-            team2={{ name: "", score: "" }}
-            matchFooter=""
-          /> */
-
-/* <div className="w-100 d-flex align-items-center justify-content-center mt-1 flex-column">
-          <CardHeader className=" rounded-top card-header w-80">
-            <p className="mb-0 font-weight-bold">Results Of Matches</p>
-          </CardHeader>
-          {this.renderRecentMatches()}
-          <Button className="my-2">View More</Button>
-        </div>
-        <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
-          <CardHeader className=" rounded-top card-header w-80">
-            <p className="mb-0 font-weight-bold">Upcoming</p>
-          </CardHeader>
-          {this.renderUpcomingMatches()}
-          <Button className="my-2">View More</Button>
-        </div> */

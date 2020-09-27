@@ -1,16 +1,15 @@
 import React from "react";
 
 import MatchCard from "./MatchCard";
-import { formatDate } from "../../utils";
-
+import { formatDate, parseTeamScore } from "../../utils";
 export const recentMatchList = (recentMatches) => {
   return recentMatches.map((match) => {
     const scores = match.stat
-      ? this.parseTeamScore(match.score, [match["team-1"], match["team-2"]])
+      ? parseTeamScore(match.score, [match["team-1"], match["team-2"]])
       : ["", ""];
     const winnerTeam = match.winner_team ? match.winner_team : "";
     return (
-      <div className="shadow-dark w-100 mb-1">
+      <div className="shadow-dark w-100 mb-1" key={match.unique_id}>
         <MatchCard
           isDone={match.matchStarted}
           location="Stadium, Location"
@@ -23,7 +22,6 @@ export const recentMatchList = (recentMatches) => {
             score: match.matchStarted && match.stat ? scores[1] : "",
           }}
           matchFooter={match.stat === "" ? "" : match.stat}
-          key={match.unique_id}
           winnerTeam={winnerTeam !== "" ? winnerTeam : ""}
         />
       </div>
@@ -36,7 +34,7 @@ export const upcomingMatchList = (upcomingMatches) => {
     if (index) {
     }
     return (
-      <div className="shadow-dark w-100 mb-1">
+      <div className="shadow-dark w-100 mb-1" key={match.unique_id}>
         <MatchCard
           isDone={false}
           location="Stadium, Location"
