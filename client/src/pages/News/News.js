@@ -3,7 +3,9 @@ import { Button } from "react-bootstrap";
 
 import { CardHeader } from "../../components/Card";
 import { NewsCardPlaceholderList } from "../../components/Placeholders";
-import newsApi, { newsApiKey } from "../../api/newsApi";
+import {
+  fetchNews,
+} from "../../helper";
 import { newsCardList } from "../../components/NewsCard";
 
 class News extends React.Component {
@@ -14,24 +16,14 @@ class News extends React.Component {
       articlesLoading: true,
     };
   }
-  fetchNews = async () => {
-    const response = await newsApi
-      .get("/", {
-        params: {
-          token: newsApiKey,
-          q: "cricket",
-        },
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    const articles = response.data.articles;
+  getNews = async () => {
+    const articles = await fetchNews();
     this.setState({ articlesLoading: false });
-    this.setState({ articles: articles });
+    this.setState({ articles});
   };
 
   componentDidMount() {
-    this.fetchNews();
+    this.getNews();
   }
 
   renderNewsCards = () => newsCardList(this.state.articles);

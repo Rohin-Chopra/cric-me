@@ -12,7 +12,9 @@ const fetchNews = async () => {
     })
     .catch((error) => {
       console.log(error);
+      return [];
     });
-  return response.data.articles;
+  console.log(response);
+  return response.data?.articles !== null ? response.data?.articles : [];
 };
 export default fetchNews;
