@@ -8,6 +8,7 @@ import {
   fetchFact,
   fetchMatches,
   fetchMatchesScores,
+  fetchFindPlayer,
 } from "../../helper";
 import DynamicInput from "../../components/DynamicPlaceholder";
 import Card, { CardHeader } from "../../components/Card";
@@ -90,10 +91,20 @@ class Home extends React.Component {
       </>
     );
   }
+  handleSearchKeyDown = (e) => {
+    if (e.key === "Enter") {
+      alert("yes");
+      this.handleSearch(e.target.value);
+    }
+  };
+  handleSearch = async (q) => {
+    const searchedPlayers = await fetchFindPlayer(q);
+    console.log(searchedPlayers);
+  };
   componentDidMount() {
     this.getFact();
-    this.getMatches();
-    this.getNews();
+    // this.getMatches();
+    //this.getNews();
   }
   render() {
     return (
@@ -111,6 +122,7 @@ class Home extends React.Component {
                 </InputGroup.Text>
               </InputGroup.Prepend>
               <DynamicInput
+                onKeyDown={(e) => this.handleSearchKeyDown(e)}
                 className="bg-primary form-control"
                 options={["Dhoni", "Sachin", "Kohli", "Pant"]}
               />

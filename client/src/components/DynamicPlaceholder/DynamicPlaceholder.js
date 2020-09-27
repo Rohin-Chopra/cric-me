@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { getRandomInt } from "../../utils";
 
-const DynamicPlaceholder = ({ className, options, onChange = () => {} }) => {
+const DynamicPlaceholder = ({
+  className,
+  options,
+  onChange = () => {},
+  onKeyDown = () => {},
+}) => {
   const [placeholder, setPlaceholder] = useState("");
 
   useEffect(() => {
@@ -16,6 +21,7 @@ const DynamicPlaceholder = ({ className, options, onChange = () => {} }) => {
 
   return (
     <input
+      onKeyDown={onKeyDown}
       className={className}
       type="text"
       placeholder={placeholder}
