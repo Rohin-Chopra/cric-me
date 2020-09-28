@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { Button, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -33,7 +34,9 @@ class Home extends React.Component {
       upcomingMatchesLoading: true,
       upcomingMatches: [],
       fact: "",
+      redirect: false,
       factLoading: true,
+      playerInputValue: "",
     };
   }
 
@@ -91,15 +94,18 @@ class Home extends React.Component {
       </>
     );
   }
+  handleSearchChange = (e) => {
+    this.setState({ playerInputValue: e.target.value });
+  };
   handleSearchKeyDown = (e) => {
     if (e.key === "Enter") {
-      alert("yes");
       this.handleSearch(e.target.value);
     }
   };
   handleSearch = async (q) => {
-    const searchedPlayers = await fetchFindPlayer(q);
-    console.log(searchedPlayers);
+    // const searchedPlayers = await fetchFindPlayer(q);
+    // console.log(searchedPlayers);
+    this.setState({ redirect: true });
   };
   componentDidMount() {
     this.getFact();
@@ -109,6 +115,14 @@ class Home extends React.Component {
   render() {
     return (
       <div className="container d-flex align-items-center justify-content-center flex-column">
+        {this.state.redirect ? (
+          <Redirect
+            to={{
+              pathname: `/players/search/${this.state.playerInputValue}`,
+              state: { player: 1 },
+            }}
+          />
+        ) : null}
         <div className="w-100 d-flex align-items-center justify-content-center">
           <Card
             className="text-center mt-2 rounded"
@@ -122,6 +136,8 @@ class Home extends React.Component {
                 </InputGroup.Text>
               </InputGroup.Prepend>
               <DynamicInput
+                value={this.state.playerInputValue}
+                onChange={this.handleSearchChange}
                 onKeyDown={(e) => this.handleSearchKeyDown(e)}
                 className="bg-primary form-control"
                 options={["Dhoni", "Sachin", "Kohli", "Pant"]}
@@ -129,7 +145,9 @@ class Home extends React.Component {
             </InputGroup>
             <div className="search-bar-btns">
               {" "}
-              <Button className="mr-3">Search Player</Button>
+              <Button className="mr-3" onClick={this.handleSearch}>
+                Search Player
+              </Button>
               <Button>Get a random player</Button>
             </div>
           </Card>

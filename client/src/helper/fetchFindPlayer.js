@@ -7,7 +7,7 @@ const fetchFindPlayer = async (playerName) => {
       name: playerName,
     },
   });
-  return response.data;
+  return response.data.data;
 };
 
 export default fetchFindPlayer;

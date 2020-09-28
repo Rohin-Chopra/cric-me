@@ -6,6 +6,7 @@ const DynamicPlaceholder = ({
   options,
   onChange = () => {},
   onKeyDown = () => {},
+  value = "",
 }) => {
   const [placeholder, setPlaceholder] = useState("");
 
@@ -23,9 +24,10 @@ const DynamicPlaceholder = ({
     <input
       onKeyDown={onKeyDown}
       className={className}
-      type="text"
-      placeholder={placeholder}
       onChange={onChange}
+      type="text"
+      value={value}
+      placeholder={placeholder}
     />
   );
 };
