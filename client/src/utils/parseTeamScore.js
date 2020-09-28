@@ -1,5 +1,3 @@
-import React from "react";
-
 export default (score = "", teams) => {
   if (score === "") return "";
   const scoreArray = score.split(" ");

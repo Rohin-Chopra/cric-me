@@ -1,4 +1,4 @@
-import factApi, { factApiKey } from "../api/factApi";
+import factApi from "../api/factApi";
 
 const fetchFact = async () => {
   const response = await factApi.get("/");

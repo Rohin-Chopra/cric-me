@@ -9,7 +9,6 @@ import {
   fetchFact,
   fetchMatches,
   fetchMatchesScores,
-  fetchFindPlayer,
 } from "../../helper";
 import DynamicInput from "../../components/DynamicPlaceholder";
 import Card, { CardHeader } from "../../components/Card";

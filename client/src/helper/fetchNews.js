@@ -1,5 +1,3 @@
-import React from "react";
-
 import newsApi, { newsApiKey } from "../api/newsApi";
 
 const fetchNews = async () => {
