@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { Button, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -110,7 +110,7 @@ class Home extends React.Component {
   componentDidMount() {
     this.getFact();
     // this.getMatches();
-    //this.getNews();
+    this.getNews();
   }
   render() {
     return (
@@ -190,7 +190,9 @@ class Home extends React.Component {
             count={4}
           />
           {this.renderNewsCards()}
-          <Button className="my-2">View More</Button>
+          <Link to="/news">
+            <Button className="my-2">View More</Button>
+          </Link>
         </div>
       </div>
     );

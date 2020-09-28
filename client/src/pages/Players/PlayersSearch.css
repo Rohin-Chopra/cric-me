@@ -1,0 +1,7 @@
+/* Desktops and laptops ----------- */
+@media only screen and (min-width: 1024px) {
+  /* Styles */
+  .player-item {
+    max-width: calc(25% - 12px);
+  }
+}
