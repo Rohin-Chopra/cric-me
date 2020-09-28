@@ -105,9 +105,9 @@ class Home extends React.Component {
     this.setState({ redirect: true });
   };
   componentDidMount() {
-    this.getFact();
-    this.getMatches();
-    this.getNews();
+    // this.getFact();
+    // this.getMatches();
+    // this.getNews();
   }
   render() {
     return (

@@ -9,4 +9,5 @@
   transition: 0.3s;
   transition-timing-function: ease-in;
   border-bottom: 1px solid #fff;
+  text-decoration: none;
 }

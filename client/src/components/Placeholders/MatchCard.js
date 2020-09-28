@@ -1,6 +1,7 @@
 import React from "react";
 
 import Card, { CardHeader } from "../Card";
+import "./Placeholder.css";
 import "./MatchCard.css";
 const PlaceholderMatchCard = () => {
   return (

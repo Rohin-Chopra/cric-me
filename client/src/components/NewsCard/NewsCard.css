@@ -1,1 +1,9 @@
 
+.news-card-anchor:hover {
+  text-decoration: none;
+}
+
+.news-card-anchor:hover .news-card-title {
+  text-decoration: none;
+  color: blue !important;
+}
