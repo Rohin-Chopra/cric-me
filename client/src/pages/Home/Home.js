@@ -109,7 +109,7 @@ class Home extends React.Component {
   };
   componentDidMount() {
     this.getFact();
-    // this.getMatches();
+    this.getMatches();
     this.getNews();
   }
   render() {
@@ -168,7 +168,9 @@ class Home extends React.Component {
             count={4}
           />
           {this.renderRecentMatches()}
-          <Button className="my-2">View More</Button>
+          <Link to="/matches">
+            <Button className="my-2">View More</Button>
+          </Link>
         </div>
         <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
           <CardHeader className=" rounded-top card-header w-80">
@@ -179,7 +181,9 @@ class Home extends React.Component {
             count={4}
           />
           {this.renderUpcomingMatches()}
-          <Button className="my-2">View More</Button>
+          <Link to="/matches">
+            <Button className="my-2">View More</Button>
+          </Link>
         </div>
         <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
           <CardHeader className=" rounded-top card-header w-80">

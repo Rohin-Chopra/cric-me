@@ -1,11 +1,9 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 import { CardHeader } from "../../components/Card";
 import { NewsCardPlaceholderList } from "../../components/Placeholders";
-import {
-  fetchNews,
-} from "../../helper";
+import { fetchNews } from "../../helper";
 import { newsCardList } from "../../components/NewsCard";
 
 class News extends React.Component {
@@ -19,7 +17,7 @@ class News extends React.Component {
   getNews = async () => {
     const articles = await fetchNews();
     this.setState({ articlesLoading: false });
-    this.setState({ articles});
+    this.setState({ articles });
   };
 
   componentDidMount() {
@@ -30,7 +28,7 @@ class News extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Container>
         <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
           <CardHeader className=" rounded-top card-header w-80">
             <p className="mb-0 font-weight-bold">News</p>
@@ -41,7 +39,7 @@ class News extends React.Component {
           />
           {this.renderNewsCards()}
         </div>
-      </React.Fragment>
+      </Container>
     );
   }
 }

@@ -13,10 +13,15 @@ const MyNavBar = () => {
         <Navbar.Toggle aria-controls="navbar-toggle" />
         <Navbar.Collapse className="justify-content-center" id="navbar-toggle">
           <Nav>
-            <Link to="/"><Nav.Link href="#home">Home</Nav.Link></Link>
-            <Link to="/players"><Nav.Link href="#link">Players</Nav.Link></Link>
-            <Link to="/news"><Nav.Link href="#home">News</Nav.Link></Link>
-            <Link to="/matches"><Nav.Link href="#home">Matches</Nav.Link></Link>
+            <Link to="/">
+              <Nav.Link href="#home">Home</Nav.Link>
+            </Link>
+            <Link to="/news">
+              <Nav.Link href="#home">News</Nav.Link>
+            </Link>
+            <Link to="/matches">
+              <Nav.Link href="#home">Matches</Nav.Link>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
