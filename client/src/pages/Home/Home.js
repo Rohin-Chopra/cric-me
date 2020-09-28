@@ -102,8 +102,6 @@ class Home extends React.Component {
     }
   };
   handleSearch = async (q) => {
-    // const searchedPlayers = await fetchFindPlayer(q);
-    // console.log(searchedPlayers);
     this.setState({ redirect: true });
   };
   componentDidMount() {

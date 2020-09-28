@@ -5,7 +5,7 @@ import Card from "../Card";
 const PlayerCard = ({ player }) => {
   return (
     <Card bodyClassName="d-flex ">
-      <Avatar playerId={player.pid} />
+      <Avatar playerId={player.pid } playerName={player.name} />
       <p className="align-self-center ml-1">{player.name}</p>
     </Card>
   );

@@ -1,11 +1,12 @@
 import React from "react";
 
-const Avatar = ({ playerId }) => {
+const Avatar = ({ playerId, playerName }) => {
   return (
     <img
       src={`https://www.cricapi.com/playerpic/${playerId}.jpg`}
       style={{ height: "50px", width: "50px", borderRadius: "50%" }}
       className="align-self-center"
+      alt={`${playerName} `}
       onError={(e) => {
         e.target.onerror = null;
         e.target.src =
