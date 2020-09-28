@@ -1,7 +1,6 @@
 import React from "react";
 
 import Card from "./Card";
-import MyCardHeader from "./CardHeader";
 import "./Card.css";
 
 export default Card;

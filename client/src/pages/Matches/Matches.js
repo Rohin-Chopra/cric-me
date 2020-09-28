@@ -2,10 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 
 import { fetchMatches, fetchMatchesScores } from "../../helper";
-import MatchCard, {
-  upcomingMatchList,
-  recentMatchList,
-} from "../../components/MatchCard";
+import { upcomingMatchList, recentMatchList } from "../../components/MatchCard";
 import { CardHeader } from "../../components/Card";
 import { MatchCardPlaceholderList } from "../../components/Placeholders";
 
