@@ -25,6 +25,7 @@ a {
 
 .home-wrapper {
   min-height: 100vh;
+  position: relative;
 }
 
 .btn-primary {

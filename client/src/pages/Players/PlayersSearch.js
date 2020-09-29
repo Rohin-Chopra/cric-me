@@ -3,7 +3,7 @@ import { Row, Col, Container } from "react-bootstrap";
 
 import { fetchFindPlayer } from "../../helper";
 import PlayerCard from "../../components/PlayerCard";
-import { PlayerCardPlaceholderList } from "../../components/Placeholders";
+import { PlayerCardPlaceholder } from "../../components/Placeholders";
 import "./PlayersSearch.css";
 class PlayerSearch extends React.Component {
   constructor(props) {
@@ -21,7 +21,15 @@ class PlayerSearch extends React.Component {
   }
 
   renderPlaceholders = () => {
-    return PlayerCardPlaceholderList(true, 3);
+    const arr = [];
+    for (let index = 0; index < 3; index++) {
+      arr.push(
+        <Col lg={3} className="player-item" style={{ margin: "0px 6px 12px" }}>
+          <PlayerCardPlaceholder />
+        </Col>
+      );
+    }
+    return this.state.loading && arr;
   };
   renderPlayerCardList() {
     return this.state.players.map((player) => {
@@ -36,7 +44,7 @@ class PlayerSearch extends React.Component {
     return (
       <Container className="my-2">
         <h2>Showing Results for {this.props.match.params.playerName}</h2>
-        <Row className={`${this.state.loading ? "flex-column" : ""}`}>
+        <Row>
           {" "}
           {this.renderPlaceholders()}
           {this.renderPlayerCardList()}
