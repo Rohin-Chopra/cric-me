@@ -63,14 +63,14 @@ class Matches extends React.Component {
   };
 
   componentDidMount() {
-    this.getMatches();
+    // this.getMatches();
   }
   handleMatchTypeClick(type) {
     this.setState({ viewing: type });
   }
   render() {
     return (
-      <div className="container d-flex align-items-center justify-content-center flex-column">
+      <div className="container d-flex align-items-center justify-content-center flex-column my-2">
         <div className="align-self-start">
           View {this.renderViewMatchTypeButtons()}
         </div>

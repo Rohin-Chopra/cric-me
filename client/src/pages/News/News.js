@@ -21,7 +21,7 @@ class News extends React.Component {
   };
 
   componentDidMount() {
-    this.getNews();
+    // this.getNews();
   }
 
   renderNewsCards = () => newsCardList(this.state.articles);
@@ -29,7 +29,7 @@ class News extends React.Component {
   render() {
     return (
       <Container>
-        <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
+        <div className="w-100 d-flex align-items-center justify-content-center my-2 flex-column">
           <CardHeader className=" rounded-top card-header w-80">
             <p className="mb-0 font-weight-bold">News</p>
           </CardHeader>
