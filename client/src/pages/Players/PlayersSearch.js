@@ -15,9 +15,9 @@ class PlayerSearch extends React.Component {
   }
 
   async componentDidMount() {
-    // const players = await fetchFindPlayer(this.props.match.params.playerName);
-    // this.setState({ loading: false });
-    // this.setState({ players });
+    const players = await fetchFindPlayer(this.props.match.params.playerName);
+    this.setState({ loading: false });
+    this.setState({ players });
   }
 
   renderPlaceholders = () => {
