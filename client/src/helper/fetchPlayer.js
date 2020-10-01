@@ -1,9 +1,13 @@
-import cricApi, { criApiKey, cricApiKey } from "../api/cricApi";
+import cricApi, { cricApiKey } from "../api/cricApi";
 
-const fetchPlayer = (id) => {
-  const responnes = cricApi.get("/playerStats", {
-    pid: id,
-    apikey: cricApiKey,
+const fetchPlayer = async (id) => {
+  const response = await cricApi.get("/playerStats", {
+    params: {
+      pid: id,
+      apikey: cricApiKey,
+    },
   });
-  console.log(responnes)
+  return response.data;
 };
+
+export default fetchPlayer;

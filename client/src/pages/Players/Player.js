@@ -1,5 +1,6 @@
 import React from "react";
 
+import { fetchPlayer } from "../../helper";
 import Avatar from "../../components/Avatar";
 import Card from "../../components/Card";
 import PlayerDataRow from "./PlayerDataRow";
@@ -13,11 +14,15 @@ class Player extends React.Component {
       player: {},
     };
   }
-  getPlayer = () => {};
+  getPlayer = async () => {
+    const player = await fetchPlayer(this.props.match.params.playerId);
+    this.setState({ player });
+  };
 
   componentDidMount() {
-    const pId = this.props.match.params.playerId;
-    this.setState({ player: playerData });
+    // const pId = this.props.match.params.playerId;
+    // this.setState({ player: playerData });
+    this.getPlayer();
   }
   render() {
     return (

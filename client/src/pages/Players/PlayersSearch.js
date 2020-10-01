@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Row, Col, Container } from "react-bootstrap";
 
 import { fetchFindPlayer } from "../../helper";
@@ -35,7 +36,9 @@ class PlayerSearch extends React.Component {
     return this.state.players.map((player) => {
       return (
         <Col lg={3} className="player-item" style={{ margin: "0px 6px 12px" }}>
-          <PlayerCard player={player} />
+          <Link to={`/player/${player.pid}`}>
+            <PlayerCard player={player} />
+          </Link>
         </Col>
       );
     });
