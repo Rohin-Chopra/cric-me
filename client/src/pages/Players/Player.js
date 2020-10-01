@@ -13,7 +13,6 @@ import { NewsCardPlaceholderList } from "../../components/Placeholders";
 import { fetchNews } from "../../helper";
 import { newsCardList } from "../../components/NewsCard";
 
-import playerData from "./PlayerData";
 class Player extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +36,6 @@ class Player extends React.Component {
 
   async componentDidMount() {
     const pId = this.props.match.params.playerId;
-    this.setState({ player: playerData });
     await this.getPlayer();
     this.getNews();
   }
