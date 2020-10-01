@@ -1,10 +1,12 @@
 import React from "react";
+import { Table } from "react-bootstrap";
 
 import { fetchPlayer } from "../../helper";
 import Avatar from "../../components/Avatar";
 import Card from "../../components/Card";
-import PlayerDataRow from "./PlayerDataRow";
 import Wrapper from "../../components/Wrapper";
+import PlayerDataRow from "./PlayerDataRow";
+import PlayerStatTable from "./PlayerStatTable";
 
 import playerData from "./PlayerData";
 class Player extends React.Component {
@@ -20,9 +22,9 @@ class Player extends React.Component {
   };
 
   componentDidMount() {
-    // const pId = this.props.match.params.playerId;
-    // this.setState({ player: playerData });
-    this.getPlayer();
+    const pId = this.props.match.params.playerId;
+    this.setState({ player: playerData });
+    // this.getPlayer();
   }
   render() {
     return (
@@ -73,6 +75,14 @@ class Player extends React.Component {
               property={"In a nutshell"}
               value={this.state.player.profile}
             />
+          </div>
+          <div>
+            <h4>Batting and fielding averages</h4>
+            <PlayerStatTable stat={this.state.player?.data?.batting} />
+          </div>
+          <div>
+            <h4>Bowling averages</h4>
+            <PlayerStatTable stat={this.state.player?.data?.bowling} />
           </div>
         </Card>
       </Wrapper>
