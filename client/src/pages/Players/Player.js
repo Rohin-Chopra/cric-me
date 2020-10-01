@@ -2,11 +2,16 @@ import React from "react";
 import { Table } from "react-bootstrap";
 
 import { fetchPlayer } from "../../helper";
+
 import Avatar from "../../components/Avatar";
 import Card from "../../components/Card";
 import Wrapper from "../../components/Wrapper";
 import PlayerDataRow from "./PlayerDataRow";
 import PlayerStatTable from "./PlayerStatTable";
+import { CardHeader } from "../../components/Card";
+import { NewsCardPlaceholderList } from "../../components/Placeholders";
+import { fetchNews } from "../../helper";
+import { newsCardList } from "../../components/NewsCard";
 
 import playerData from "./PlayerData";
 class Player extends React.Component {
@@ -14,17 +19,27 @@ class Player extends React.Component {
     super(props);
     this.state = {
       player: {},
+      articles: [],
+      articlesLoading: true,
     };
+    this.playerId = this.props.match.params.playerId;
   }
   getPlayer = async () => {
-    const player = await fetchPlayer(this.props.match.params.playerId);
+    const player = await fetchPlayer(this.playerId);
     this.setState({ player });
   };
+  getNews = async () => {
+    const articles = await fetchNews(this.state.player.name);
+    this.setState({ articlesLoading: false });
+    this.setState({ articles });
+  };
+  renderNewsCards = () => newsCardList(this.state.articles);
 
-  componentDidMount() {
+  async componentDidMount() {
     const pId = this.props.match.params.playerId;
     this.setState({ player: playerData });
-    // this.getPlayer();
+    await this.getPlayer();
+    this.getNews();
   }
   render() {
     return (
@@ -85,6 +100,18 @@ class Player extends React.Component {
             <PlayerStatTable stat={this.state.player?.data?.bowling} />
           </div>
         </Card>
+        <div className="my-2 w-100">
+          <CardHeader className=" rounded-top card-header w-80">
+            <p className="mb-0 font-weight-bold">
+              Articles related to {this.state.player.name}
+            </p>
+          </CardHeader>
+          <NewsCardPlaceholderList
+            loading={this.state.articlesLoading}
+            count={4}
+          />
+          {this.renderNewsCards()}
+        </div>
       </Wrapper>
     );
   }

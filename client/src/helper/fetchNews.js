@@ -1,11 +1,11 @@
 import newsApi, { newsApiKey } from "../api/newsApi";
 
-const fetchNews = async () => {
+const fetchNews = async (q = "cricket") => {
   const response = await newsApi
     .get("/", {
       params: {
         token: newsApiKey,
-        q: "cricket",
+        q: q,
       },
     })
     .catch((error) => {
