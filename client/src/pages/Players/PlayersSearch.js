@@ -51,6 +51,9 @@ class PlayerSearch extends React.Component {
           {" "}
           {this.renderPlaceholders()}
           {this.renderPlayerCardList()}
+          {!this.state.loading && this.state.players.length === 0 ? (
+            <p>Sorry Could not find any results</p>
+          ) : null}
         </Row>
       </Container>
     );

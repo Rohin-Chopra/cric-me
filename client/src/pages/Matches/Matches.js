@@ -63,7 +63,7 @@ class Matches extends React.Component {
   };
 
   componentDidMount() {
-    // this.getMatches();
+    this.getMatches();
   }
   handleMatchTypeClick(type) {
     this.setState({ viewing: type });

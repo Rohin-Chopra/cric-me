@@ -1,5 +1,4 @@
 import React from "react";
-import { Table } from "react-bootstrap";
 
 import { fetchPlayer } from "../../helper";
 
@@ -25,6 +24,7 @@ class Player extends React.Component {
   }
   getPlayer = async () => {
     const player = await fetchPlayer(this.playerId);
+    console.log(player);
     this.setState({ player });
   };
   getNews = async () => {
@@ -34,16 +34,27 @@ class Player extends React.Component {
   };
   renderNewsCards = () => newsCardList(this.state.articles);
 
+  renderStatTable = () => {
+    return this.state.player.data ? (
+      <React.Fragment>
+        <div>
+          <h4>Batting and fielding averages</h4>
+          <PlayerStatTable stat={this.state.player?.data?.batting} />
+        </div>
+        <div>
+          <h4>Bowling averages</h4>
+          <PlayerStatTable stat={this.state.player?.data?.bowling} />
+        </div>
+      </React.Fragment>
+    ) : null;
+  };
   async componentDidMount() {
-    const pId = this.props.match.params.playerId;
     await this.getPlayer();
     this.getNews();
   }
   render() {
     return (
       <Wrapper>
-        hello
-        {this.props.match.params.playerId}
         <Avatar
           style={{ width: "unset", height: "unset" }}
           playerId={this.state.player.pid}
@@ -89,21 +100,16 @@ class Player extends React.Component {
               value={this.state.player.profile}
             />
           </div>
-          <div>
-            <h4>Batting and fielding averages</h4>
-            <PlayerStatTable stat={this.state.player?.data?.batting} />
-          </div>
-          <div>
-            <h4>Bowling averages</h4>
-            <PlayerStatTable stat={this.state.player?.data?.bowling} />
-          </div>
+          {}
         </Card>
         <div className="my-2 w-100">
-          <CardHeader className=" rounded-top card-header w-80">
-            <p className="mb-0 font-weight-bold">
-              Articles related to {this.state.player.name}
-            </p>
-          </CardHeader>
+          {this.state.articles.length !== 0 ? (
+            <CardHeader className=" rounded-top card-header w-80">
+              <p className="mb-0 font-weight-bold">
+                Articles related to {this.state.player.name}
+              </p>
+            </CardHeader>
+          ) : null}
           <NewsCardPlaceholderList
             loading={this.state.articlesLoading}
             count={4}

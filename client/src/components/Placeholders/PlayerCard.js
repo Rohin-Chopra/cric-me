@@ -1,6 +1,6 @@
 import React from "react";
 
-import Card, { CardHeader } from "../Card";
+import Card from "../Card";
 import "./Placeholder.css";
 
 const PlaceholderPlayerCard = () => {

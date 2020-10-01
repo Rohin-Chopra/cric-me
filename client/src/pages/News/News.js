@@ -21,7 +21,7 @@ class News extends React.Component {
   };
 
   componentDidMount() {
-    // this.getNews();
+    this.getNews();
   }
 
   renderNewsCards = () => newsCardList(this.state.articles);
