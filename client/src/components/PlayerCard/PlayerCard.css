@@ -1,0 +1,4 @@
+.player-search-card:hover {
+  background-color: #444f5a !important;
+  transition: background-color 300ms linear;
+}
