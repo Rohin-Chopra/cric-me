@@ -7,6 +7,9 @@ a {
   color: #fff;
   text-decoration: none;
 }
+hr {
+  border-top: 1px solid #e3e3e3;
+}
 
 .bg-primary {
   background-color: #232b32 !important;

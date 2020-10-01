@@ -1,10 +1,10 @@
 import React from "react";
 
-const Avatar = ({ playerId, playerName }) => {
+const Avatar = ({ playerId, playerName,style }) => {
   return (
     <img
       src={`https://www.cricapi.com/playerpic/${playerId}.jpg`}
-      style={{ height: "50px", width: "50px", borderRadius: "50%" }}
+      style={{...style,borderRadius: "50%" }}
       className="align-self-center"
       alt={`${playerName} `}
       onError={(e) => {
@@ -15,4 +15,6 @@ const Avatar = ({ playerId, playerName }) => {
     />
   );
 };
+
+
 export default Avatar;

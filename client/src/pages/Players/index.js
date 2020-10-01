@@ -1,2 +1,4 @@
+import Player from "./Player";
 import PlayersSearch from "./PlayersSearch";
-export default PlayersSearch;
+export { PlayersSearch };
+export default Player;
