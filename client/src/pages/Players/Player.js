@@ -100,7 +100,7 @@ class Player extends React.Component {
               value={this.state.player.profile}
             />
           </div>
-          {}
+          {this.renderStatTable()}
         </Card>
         <div className="my-2 w-100">
           {this.state.articles.length !== 0 ? (
