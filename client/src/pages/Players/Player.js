@@ -24,7 +24,6 @@ class Player extends React.Component {
   }
   getPlayer = async () => {
     const player = await fetchPlayer(this.playerId);
-    console.log(player);
     this.setState({ player });
   };
   getNews = async () => {

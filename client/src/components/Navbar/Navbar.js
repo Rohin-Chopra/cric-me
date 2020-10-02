@@ -30,9 +30,9 @@ const MyNavBar = () => {
         <Navbar.Toggle aria-controls="navbar-toggle" />
         <Navbar.Collapse className="justify-content-center" id="navbar-toggle">
           <Nav>
-            {NavLinks.map((el) => {
+            {NavLinks.map((el, index) => {
               return (
-                <Link to={el.path}>
+                <Link to={el.path} key={index}>
                   <Nav.Link href="#home">{el.text}</Nav.Link>
                 </Link>
               );
