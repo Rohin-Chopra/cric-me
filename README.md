@@ -44,14 +44,9 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
 
 
 
@@ -62,7 +57,7 @@
 
 CricMe is a website that allows you see cricket news, upcoming and recent matches and player stats.
 
- ### Why was it built?:
+ ### Why was it built ?
 * I love Cricket.
 * Building something that I love allowed me to be more passionate about the project and add extra features to it.
 * To get more familar with Javascript Library => React.
