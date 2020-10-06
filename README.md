@@ -165,7 +165,7 @@ Project Link: [https://github.com/Rohin1212/cric-me](https://github.com/Rohin121
 [forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
 [stars-shield]: https://img.shields.io/github/stars/Rohin1212/cric-me.svg?style=flat-square
 [stars-url]: https://github.com/Rohin1212/cric-me/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues/Rohin1212/cric-me.svg?style=flat-square
 [issues-url]: https://github.com/Rohin1212/cric-me/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
 [license-url]: https://github.com/Rohin1212/cric-me/blob/master/LICENSE.txt
