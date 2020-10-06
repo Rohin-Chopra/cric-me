@@ -23,7 +23,7 @@
     <img src="https://i.imgur.com/vUKNw2K.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h1 align="center">CricMe</h1>
 
   <p align="center">
     A website for cricket enthusiasts to satisfy their cricketing needs with cricket scores, news and player stats.
