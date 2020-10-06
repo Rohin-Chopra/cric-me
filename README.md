@@ -28,7 +28,7 @@
   <p align="center">
     A website for cricket enthusiasts to satisfy their cricketing needs with cricket scores, news and player stats.
     <br />
-    <a href="https://github.com/Rohin1212/cric-me/Best-README-Template">View Website</a>
+    <a href="https://rohin-cricme.netlify.app">View Website</a>
     ·
     <a href="https://github.com/Rohin1212/cric-me/issues">Report Bug</a>
     ·
@@ -159,16 +159,16 @@ Project Link: [https://github.com/Rohin1212/cric-me](https://github.com/Rohin121
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
+[contributors-shield]: https://img.shields.io/github/contributors/Rohin1212/cric-me.svg?style=flat-square
+[contributors-url]: https://github.com/Rohin1212/cric-me/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Rohin1212/cric-me.svg?style=flat-square
 [forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[stars-shield]: https://img.shields.io/github/stars/Rohin1212/cric-me.svg?style=flat-square
+[stars-url]: https://github.com/Rohin1212/cric-me/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[issues-url]: https://github.com/Rohin1212/cric-me/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[license-url]: https://github.com/Rohin1212/cric-me/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/rohin-chopra-2b38791a0/
 [product-screenshot]: https://i.imgur.com/WLb29Lo.png
