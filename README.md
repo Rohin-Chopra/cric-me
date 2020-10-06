@@ -19,8 +19,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://www.freelogodesign.org/preview?lang=en&autodownload=true&logo=cb9c6b0c-c4e8-4daf-b89a-b27efb960ed3" alt="Logo" width="80" height="80">
+  <a href="https://rohin-cricme.netlify.app">
+    <img src="https://i.imgur.com/vUKNw2K.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Best-README-Template</h3>
