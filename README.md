@@ -106,8 +106,10 @@ yarn install
 
 4. Enter your APIKeys for CricApi and NewsApi in `config.js`
 ```JS
-const API_KEY = 'ENTER YOUR API';
+const newsApiKey = 'ENTER YOUR API';
+const cricApiKey = 'ENTER YOUR API';
 ```
+
 
 
 
