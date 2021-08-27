@@ -5,7 +5,7 @@ const fetchMatchesScores = async (matches) => {
     if (match.matchStarted) {
       const response = await cricApi.get("/cricketScore", {
         params: {
-          apikey: cricApiKey,
+          apikey: process.env.REACT_APP_CRICKET_API_KEY,
           unique_id: match.unique_id,
         },
       });

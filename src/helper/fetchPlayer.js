@@ -1,13 +1,13 @@
-import cricApi, { cricApiKey } from "../api/cricApi";
+import cricApi, { cricApiKey } from "../api/cricApi"
 
 const fetchPlayer = async (id) => {
   const response = await cricApi.get("/playerStats", {
     params: {
       pid: id,
-      apikey: cricApiKey,
+      apikey: process.env.REACT_APP_CRICKET_API_KEY,
     },
-  });
-  return response.data;
-};
+  })
+  return response.data
+}
 
-export default fetchPlayer;
+export default fetchPlayer

@@ -4,7 +4,7 @@ const fetchNews = async (q = "cricket") => {
   const response = await newsApi
     .get("/", {
       params: {
-        apiKey: newsApiKey,
+        apiKey: process.env.REACT_APP_NEWS_API_KEY,
         q: q,
         sortBy: 'relevance'
       },

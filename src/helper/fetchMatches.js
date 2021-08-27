@@ -2,7 +2,7 @@ import cricApi, { cricApiKey } from "../api/cricApi";
 
 const fetchMatches = async () => {
   const response = await cricApi.get("/matches", {
-    params: { apikey: cricApiKey },
+    params: { apikey: process.env.REACT_APP_CRICKET_API_KEY },
   });
   const upcomingMatches = [];
   const recentMatches = response.data.matches.filter((match) => {
