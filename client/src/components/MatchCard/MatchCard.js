@@ -21,26 +21,26 @@ const MatchCard = ({
   };
   const renderTrophy = (team) => {
     return team === winnerTeam ? (
-      <FontAwesomeIcon className="ml-1 text-success" icon={faTrophy} />
+      <FontAwesomeIcon className='ml-1 text-success' icon={faTrophy} />
     ) : null;
   };
   return (
     <React.Fragment>
       <Card style={{ borderRadius: "0" }}>
-        <div className="match-card-header">
-          <p className="font-weight-bold mb-0">
+        <div className='match-card-header'>
+          <p className='font-weight-bold mb-0'>
             {isDone ? "Result" : "Scheduled"}
           </p>
-          <p className="text-secondary">{location}</p>
+          <p className='text-secondary'>{location}</p>
         </div>
-        <div className="d-flex justify-content-between mb-2">
+        <div className='d-flex justify-content-between mb-2'>
           <span>
             {team1.name}
             {renderTrophy(team1.name)}
           </span>
           {[scores()[0]]}{" "}
         </div>
-        <div className="d-flex justify-content-between">
+        <div className='d-flex justify-content-between'>
           <span>
             {team2.name}
             {renderTrophy(team2.name)}
@@ -49,7 +49,7 @@ const MatchCard = ({
         </div>
       </Card>
       <CardHeader>
-        <p className="mb-0">{matchFooter}</p>
+        <p className='mb-0'>{matchFooter}</p>
       </CardHeader>
     </React.Fragment>
   );

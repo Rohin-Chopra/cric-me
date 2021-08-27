@@ -49,7 +49,7 @@ class Matches extends React.Component {
     return this.buttonConfig.map((type) => {
       return (
         <Button
-          className="mr-2"
+          className='mr-2'
           variant={this.state.viewing === type ? "secondary" : "primary"}
           onClick={() => {
             this.handleMatchTypeClick(type);
@@ -70,14 +70,14 @@ class Matches extends React.Component {
   }
   render() {
     return (
-      <div className="container d-flex align-items-center justify-content-center flex-column my-2">
-        <div className="align-self-start">
+      <div className='container d-flex align-items-center justify-content-center flex-column my-2'>
+        <div className='align-self-start'>
           View {this.renderViewMatchTypeButtons()}
         </div>
         {this.state.viewing === "recent" || this.state.viewing === "all" ? (
-          <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
-            <CardHeader className=" rounded-top card-header w-80">
-              <p className="mb-0 font-weight-bold">Recent Matches</p>
+          <div className='w-100 d-flex align-items-center justify-content-center mt-2 flex-column'>
+            <CardHeader className=' rounded-top card-header w-80'>
+              <p className='mb-0 font-weight-bold'>Recent Matches</p>
             </CardHeader>
             <MatchCardPlaceholderList
               loading={this.state.recentMatchesLoading}
@@ -87,9 +87,9 @@ class Matches extends React.Component {
           </div>
         ) : null}
         {this.state.viewing === "upcoming" || this.state.viewing === "all" ? (
-          <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
-            <CardHeader className=" rounded-top card-header w-80">
-              <p className="mb-0 font-weight-bold">Upcoming</p>
+          <div className='w-100 d-flex align-items-center justify-content-center mt-2 flex-column'>
+            <CardHeader className=' rounded-top card-header w-80'>
+              <p className='mb-0 font-weight-bold'>Upcoming</p>
             </CardHeader>
             <MatchCardPlaceholderList
               loading={this.state.upcomingMatchesLoading}
