@@ -65,6 +65,7 @@ class Home extends React.Component {
   renderUpcomingMatches = () => {
     return upcomingMatchList(this.state.upcomingMatches);
   };
+
   getNews = async () => {
     const articles = await fetchNews();
     this.setState({ articlesLoading: false });
@@ -76,6 +77,7 @@ class Home extends React.Component {
       this.state.articles.filter((match, index) => index < 3)
     );
   };
+
   getFact = async () => {
     this.setState({ fact: "" });
     this.setState({ factLoading: true });
@@ -87,7 +89,7 @@ class Home extends React.Component {
     return (
       <>
         <p>{this.state.fact}</p>
-        <Button className="mr-3" onClick={() => this.getFact()}>
+        <Button className='mr-3' onClick={() => this.getFact()}>
           Get Another Fact
         </Button>
       </>
@@ -111,7 +113,7 @@ class Home extends React.Component {
   }
   render() {
     return (
-      <div className="container d-flex align-items-center justify-content-center flex-column">
+      <div className='container d-flex align-items-center justify-content-center flex-column'>
         {this.state.redirect ? (
           <Redirect
             to={{
@@ -120,15 +122,15 @@ class Home extends React.Component {
             }}
           />
         ) : null}
-        <div className="w-100 d-flex align-items-center justify-content-center">
+        <div className='w-100 d-flex align-items-center justify-content-center'>
           <Card
-            className="text-center mt-2 rounded"
-            bodyClassName="d-flex flex-column align-items-center justify-content-center"
+            className='text-center mt-2 rounded'
+            bodyClassName='d-flex flex-column align-items-center justify-content-center'
           >
             <h2>Which Player Do you Want to look at?</h2>
-            <InputGroup className="mb-3" id="search-bar">
+            <InputGroup className='mb-3' id='search-bar'>
               <InputGroup.Prepend>
-                <InputGroup.Text id="player-name">
+                <InputGroup.Text id='player-name'>
                   <FontAwesomeIcon icon={faSearch} />{" "}
                 </InputGroup.Text>
               </InputGroup.Prepend>
@@ -136,63 +138,63 @@ class Home extends React.Component {
                 value={this.state.playerInputValue}
                 onChange={this.handleSearchChange}
                 onKeyDown={(e) => this.handleSearchKeyDown(e)}
-                className="bg-primary form-control"
+                className='bg-primary form-control'
                 options={["Dhoni", "Sachin", "Kohli", "Pant"]}
               />
             </InputGroup>
-            <div className="search-bar-btns">
+            <div className='search-bar-btns'>
               {" "}
-              <Button className="mr-3" onClick={this.handleSearch}>
+              <Button className='mr-3' onClick={this.handleSearch}>
                 Search Player
               </Button>
               <Button>Get a random player</Button>
             </div>
           </Card>
         </div>
-        <div className="w-100 d-flex align-items-center justify-content-center my-2">
-          <Card className="rounded">
+        <div className='w-100 d-flex align-items-center justify-content-center my-2'>
+          <Card className='rounded'>
             <h3>Fact For today</h3>
             <FactPlaceholder loading={this.state.factLoading} />
             {this.renderFact()}
           </Card>
         </div>
-        <div className="w-100 d-flex align-items-center justify-content-center mt-1 flex-column">
-          <CardHeader className=" rounded-top card-header w-80">
-            <p className="mb-0 font-weight-bold">Results Of Matches</p>
+        <div className='w-100 d-flex align-items-center justify-content-center mt-1 flex-column'>
+          <CardHeader className=' rounded-top card-header w-80'>
+            <p className='mb-0 font-weight-bold'>Results Of Matches</p>
           </CardHeader>
           <MatchCardPlaceholderList
             loading={this.state.recentMatchesLoading}
             count={4}
           />
           {this.renderRecentMatches()}
-          <Link to="/matches">
-            <Button className="my-2">View More</Button>
+          <Link to='/matches'>
+            <Button className='my-2'>View More</Button>
           </Link>
         </div>
-        <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
-          <CardHeader className=" rounded-top card-header w-80">
-            <p className="mb-0 font-weight-bold">Upcoming</p>
+        <div className='w-100 d-flex align-items-center justify-content-center mt-2 flex-column'>
+          <CardHeader className=' rounded-top card-header w-80'>
+            <p className='mb-0 font-weight-bold'>Upcoming</p>
           </CardHeader>
           <MatchCardPlaceholderList
             loading={this.state.upcomingMatchesLoading}
             count={4}
           />
           {this.renderUpcomingMatches()}
-          <Link to="/matches">
-            <Button className="my-2">View More</Button>
+          <Link to='/matches'>
+            <Button className='my-2'>View More</Button>
           </Link>
         </div>
-        <div className="w-100 d-flex align-items-center justify-content-center mt-2 flex-column">
-          <CardHeader className=" rounded-top card-header w-80">
-            <p className="mb-0 font-weight-bold">News</p>
+        <div className='w-100 d-flex align-items-center justify-content-center mt-2 flex-column'>
+          <CardHeader className=' rounded-top card-header w-80'>
+            <p className='mb-0 font-weight-bold'>News</p>
           </CardHeader>
           <NewsCardPlaceholderList
             loading={this.state.articlesLoading}
             count={4}
           />
           {this.renderNewsCards()}
-          <Link to="/news">
-            <Button className="my-2">View More</Button>
+          <Link to='/news'>
+            <Button className='my-2'>View More</Button>
           </Link>
         </div>
       </div>

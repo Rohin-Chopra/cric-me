@@ -2,13 +2,13 @@ import React from "react";
 
 import Card from "../Card";
 import "./NewsCard";
-const NewsCard = ({ imgURL, title, subtitle, link = "" }) => {
+const NewsCard = ({ urlToImage, title, subtitle, link = "" }) => {
   return (
     <a href={link} className="d-block w-100 news-card-anchor">
       <Card className="mb-2" bodyClassName="d-flex news-card">
         <img
           className="news-img rounded"
-          src={imgURL}
+          src={urlToImage}
           alt={title}
           style={{ width: "200px", height: "150px" }}
         />
