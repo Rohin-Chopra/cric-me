@@ -18,8 +18,6 @@ const fetchMatchesScores = async (matches) => {
     return match;
   });
   const dataWithPromiseResolved = await Promise.all(data);
-  console.log('here');
-  console.log(dataWithPromiseResolved);
   return dataWithPromiseResolved;
 };
 
